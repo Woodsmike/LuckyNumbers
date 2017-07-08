@@ -96,9 +96,11 @@ namespace LuckyNumbers
                 //I used a foor loop with a do while loop nested.  I needed to make 
                 //sure the random numbers were inside the range the user entered..and
                 //a zero would not be stored as an element.  
-                //A zero would be stored as an element when trying to .
-                //because while attempting the stretch
-                //task, 
+                //A zero would be stored as an element when trying to attempt the stretch
+                //tasks.
+                //while attempting the stretch task, the computer would store a zero
+                //in as an element instead of the duplicate value.  For some reason
+                //it does not do that when a list is used instead of an array.
                 for (int j = 0; j < 6; j++)
                 {
                     do
@@ -109,16 +111,21 @@ namespace LuckyNumbers
 
                 }
 
+                //Printed out all the elements in the list
                 foreach (int numbr in listNumbers)
                 {
                     Console.WriteLine("Lucky Number: " + numbr);
 
                 }
+
+                //first I hard coded the jackpot value.  Then I wanted to make it 
+                //closer to real world, so I made a random jackpot amount depending 
+                //on the range the user entered.
                 string jackpotAmount = "$20,000,000.00";
                 decimal jackPot = rNumber.Next((lowestNumber * 100000), (highestNumber * 500000));
                 jackpotAmount = jackPot.ToString("C2");
 
-
+                //I display the current jackpot total
                 Console.WriteLine("\n\nCurrent Jackpot Total: " + jackpotAmount + "\n\n");
                 Console.WriteLine("Please press any key to continue.");
                 while (Console.KeyAvailable)
@@ -128,6 +135,11 @@ namespace LuckyNumbers
                 Console.ReadKey();
                 Console.Clear();
 
+                //I wanted to compared every element in the first array to 
+                //every element in the second array to see if they are any
+                //matching numbers.  I used a for loop with if statements.
+                //I did this to find the total amount of picks that are
+                //correct.  Then I printed it to the console.
                 int totalNumberOfCorrectPicks = 0;
                 for (int k = 0; k < 6; k++)
                 {
@@ -159,7 +171,13 @@ namespace LuckyNumbers
                 Console.WriteLine("\nYou guessed " + totalNumberOfCorrectPicks +
                     " numbers correctly\n");
 
-               
+               //I needed to figure out the player's winnings.  I could have used
+               //a switch case to determine how many correct picks determined
+               //the amount of winnings.  Since I had a random total jackpot, I
+               //determined the if statement with a percentage to be the best.
+               //I divided the total jackpot by the (7  minus the number of picks
+               //correct).  The higher the correct picks the lower the denominator
+               //which gives a larger winning amount.
                 decimal playersWinnings = 0m;
                 if (totalNumberOfCorrectPicks == 0)
                 {
@@ -170,8 +188,7 @@ namespace LuckyNumbers
                     playersWinnings = jackPot / (7 - totalNumberOfCorrectPicks);
                 }
 
-
-
+                //I printed out the player's winnings
                 Console.WriteLine("You won " + playersWinnings.ToString("C2") + "!\n");
                 Console.WriteLine("Please press any key to continue.");
                 while (Console.KeyAvailable)
@@ -181,6 +198,9 @@ namespace LuckyNumbers
                 Console.ReadKey();
                 Console.Clear();
 
+                //If the user answers yes to the following question then it will
+                //loop around (because I used the do-while loop) to begin the 
+                //game again.
                 Console.WriteLine("Do you want to play again?\n");
                 Console.WriteLine("Type \"Yes\" or any other key to exit.");
                 userAnswer = Console.ReadLine().ToLower();
@@ -188,6 +208,8 @@ namespace LuckyNumbers
 
 
             } while (userAnswer == "yes");
+            //I used another while loop to make sure the user either types in 
+            //'yes' or 'no'.  If the user types no, then the program will exit.
             while (userAnswer == "no")
             {
                 Console.WriteLine("\"Thanks for playing!\"\n\n");
