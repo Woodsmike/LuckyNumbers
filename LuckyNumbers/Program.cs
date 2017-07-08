@@ -10,21 +10,24 @@ namespace LuckyNumbers
     {
         static void Main(string[] args)
         {
-            string userAnswer;
-            string jackpotAmount = "12,000,000.00";
-            Console.WriteLine("Welcome to LUCKY NUMBERS! How lucky are YOU?\n");
-            Console.WriteLine("If you are feeling lucky, press any key to continue.");
-            while (Console.KeyAvailable)
-            {
-                Console.ReadKey(false);
-            }
-            Console.ReadKey();
-            Console.Clear();
+            string userAnswer = " ";
+
+            Random rNumber = new Random();
+
             do
             {
-                Console.WriteLine("The current Jackpot amount is : $" + jackpotAmount + "\n");
+                Console.WriteLine("Welcome to LUCKY NUMBERS! How lucky are YOU?\n");
+                Console.WriteLine("If you are feeling lucky, press any key to continue.");
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(false);
+                }
+                Console.ReadKey();
+                Console.Clear();
+            
+
                 Console.WriteLine("In order to play this game you must choose a range\n" +
-                    "of numbers by picking the lowest number in the range\n"+
+                    "of numbers by picking the lowest number in the range\n" +
                     "and picking the highest number in the range.\n");
                 Console.WriteLine("Please enter the lowest number in the range.");
                 int lowestNumber = int.Parse(Console.ReadLine());
@@ -37,10 +40,10 @@ namespace LuckyNumbers
                 int[] numbersPicked = new int[6];
                 int number;
                 string numberString;
-                
+
                 for (i = 0; i < 6; i++)
                 {
-                     
+
                     Console.Write("Number: ", i);
                     numberString = Console.ReadLine();
                     bool intResultTryParse = int.TryParse(numberString, out number);
@@ -50,9 +53,9 @@ namespace LuckyNumbers
                             + lowestNumber + " - " + highestNumber + ".\nNumber: ", i);
                         numberString = Console.ReadLine();
                         intResultTryParse = int.TryParse(numberString, out number);
-                        
+
                     }
-                   
+
                     numbersPicked[i] = number;
                 }
                 Console.WriteLine("\n\n");
@@ -60,14 +63,14 @@ namespace LuckyNumbers
                 Console.Clear();
                 Console.Write("You entered : ");
                 foreach (int numbs in numbersPicked)
-                {                    
+                {
                     Console.Write(numbs + " ");
                 }
-                
-                Random rNumber = new Random();
+
+
                 List<int> listNumbers = new List<int>();
                 int numberS;
-                int ranNums;
+
                 int[] randomNumberArray = new int[6];
                 Console.WriteLine("\nYour lucky numbers are : \n");
                 for (int j = 0; j < 6; j++)
@@ -77,17 +80,30 @@ namespace LuckyNumbers
                         numberS = rNumber.Next(lowestNumber, highestNumber);
                     } while (listNumbers.Contains(numberS));
                     listNumbers.Add(numberS);
-                   
+
                 }
 
-                    foreach (int numbr in listNumbers)
+                foreach (int numbr in listNumbers)
                 {
                     Console.WriteLine("Lucky Number: " + numbr);
 
                 }
-                
+                string jackpotAmount;
+                decimal jackPot = rNumber.Next((lowestNumber * 100000), (highestNumber * 500000));
+                jackpotAmount = jackPot.ToString("C2");
+
+
+                Console.WriteLine("\n\nCurrent Jackpot Total: " + jackpotAmount + "\n\n");
+                Console.WriteLine("Please press any key to continue.");
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(false);
+                }
+                Console.ReadKey();
+                Console.Clear();
+
                 int totalNumberOfCorrectPicks = 0;
-                for(int l = 0; l < 6; l++)
+                for (int l = 0; l < 6; l++)
                 {
                     if (listNumbers[0] == numbersPicked[l])
                     {
@@ -114,12 +130,22 @@ namespace LuckyNumbers
                         totalNumberOfCorrectPicks += 1;
                     }
                 }
-                Console.WriteLine("\nYou guessed " + totalNumberOfCorrectPicks + " numbers correctly\n");
+                Console.WriteLine("\nYou guessed " + totalNumberOfCorrectPicks +
+                    " numbers correctly\n");
 
-                decimal jackpotAmountDec = decimal.Parse(jackpotAmount);
-                decimal playersWinnings = jackpotAmountDec / (7 - totalNumberOfCorrectPicks);
+               
+                decimal playersWinnings = 0m;
+                if (totalNumberOfCorrectPicks == 0)
+                {
+                    playersWinnings = 0m;
+                }
+                else
+                {
+                    playersWinnings = jackPot / (7 - totalNumberOfCorrectPicks);
+                }
 
-                
+
+
                 Console.WriteLine("You won " + playersWinnings.ToString("C2") + "!\n");
                 Console.WriteLine("Please press any key to continue.");
                 while (Console.KeyAvailable)
@@ -134,8 +160,10 @@ namespace LuckyNumbers
                 userAnswer = Console.ReadLine().ToLower();
                 Console.Clear();
 
+
             } while (userAnswer == "yes");
             Console.WriteLine("\"Thanks for playing!\"\n\n");
         }
     }
 }
+
