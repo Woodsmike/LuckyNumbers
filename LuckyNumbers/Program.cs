@@ -65,69 +65,77 @@ namespace LuckyNumbers
                 }
                 
                 Random rNumber = new Random();
-                
+                List<int> listNumbers = new List<int>();
+                int numberS;
+                int ranNums;
                 int[] randomNumberArray = new int[6];
                 Console.WriteLine("\nYour lucky numbers are : \n");
                 for (int j = 0; j < 6; j++)
                 {
-
-                int ranNums = rNumber.Next((lowestNumber), (highestNumber));
-                    while(!randomNumberArray.Contains(ranNums))
+                    do
                     {
-                        break; 
-                    }
+                        numberS = rNumber.Next(lowestNumber, highestNumber);
+                    } while (listNumbers.Contains(numberS));
+                    listNumbers.Add(numberS);
                    
-                    randomNumberArray[j] = ranNums;
                 }
-                
-                foreach (int ranNums in randomNumberArray)
+
+                    foreach (int numbr in listNumbers)
                 {
-                    Console.WriteLine("Lucky Number : " + ranNums);
+                    Console.WriteLine("Lucky Number: " + numbr);
 
                 }
-                int randomNum1 = randomNumberArray[0]; 
-                int randomNum2 = randomNumberArray[1]; 
-                int randomNum3 = randomNumberArray[2]; 
-                int randomNum4 = randomNumberArray[3];
-                int randomNum5 = randomNumberArray[4];
-                int randomNum6 = randomNumberArray[5];
+                
                 int totalNumberOfCorrectPicks = 0;
-                for(int l = 1; l <=5; l++)
+                for(int l = 0; l < 6; l++)
                 {
-                    if (randomNum1 == numbersPicked[l])
+                    if (listNumbers[0] == numbersPicked[l])
                     {
                         totalNumberOfCorrectPicks += 1;
                     }
-                    if (randomNum2 == numbersPicked[l])
+                    if (listNumbers[1] == numbersPicked[l])
                     {
                         totalNumberOfCorrectPicks += 1;
                     }
-                    if (randomNum3 == numbersPicked[l])
+                    if (listNumbers[2] == numbersPicked[l])
                     {
                         totalNumberOfCorrectPicks += 1;
                     }
-                    if (randomNum4 == numbersPicked[l])
+                    if (listNumbers[3] == numbersPicked[l])
                     {
                         totalNumberOfCorrectPicks += 1;
                     }
-                    if (randomNum5 == numbersPicked[l])
+                    if (listNumbers[4] == numbersPicked[l])
                     {
                         totalNumberOfCorrectPicks += 1;
                     }
-                    if (randomNum6 == numbersPicked[l])
+                    if (listNumbers[5] == numbersPicked[l])
                     {
                         totalNumberOfCorrectPicks += 1;
                     }
                 }
-                Console.WriteLine("\nYou guessed " + totalNumberOfCorrectPicks + " numbers correctly");
+                Console.WriteLine("\nYou guessed " + totalNumberOfCorrectPicks + " numbers correctly\n");
+
+                decimal jackpotAmountDec = decimal.Parse(jackpotAmount);
+                decimal playersWinnings = jackpotAmountDec / (7 - totalNumberOfCorrectPicks);
+
                 
-                
-                Console.WriteLine("Do you want to play again?");
+                Console.WriteLine("You won " + playersWinnings.ToString("C2") + "!\n");
+                Console.WriteLine("Please press any key to continue.");
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(false);
+                }
+                Console.ReadKey();
+                Console.Clear();
+
+                Console.WriteLine("Do you want to play again?\n");
+                Console.WriteLine("Type \"Yes\" or any other key to exit.");
                 userAnswer = Console.ReadLine().ToLower();
                 Console.Clear();
 
             } while (userAnswer == "yes");
-            Console.WriteLine("\"Thanks for playing!\"");
+            Console.WriteLine("\"Thanks for playing!\"\n\n");
         }
     }
 }
