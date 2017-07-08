@@ -201,20 +201,17 @@ namespace LuckyNumbers
                 //If the user answers yes to the following question then it will
                 //loop around (because I used the do-while loop) to begin the 
                 //game again.
-                Console.WriteLine("Do you want to play again?\n");
-                Console.WriteLine("Type \"Yes\" or any other key to exit.");
+                Console.WriteLine("Do you want to play again?  YES/NO \n");
                 userAnswer = Console.ReadLine().ToLower();
                 Console.Clear();
-
-
-            } while (userAnswer == "yes");
-            //I used another while loop to make sure the user either types in 
-            //'yes' or 'no'.  If the user types no, then the program will exit.
-            while (userAnswer == "no")
-            {
-                Console.WriteLine("\"Thanks for playing!\"\n\n");
-                return;
-            }
+                
+                while(userAnswer != "no" && userAnswer != "yes")
+                {
+                    Console.WriteLine("Do you want to play again?  YES/NO \n");
+                    userAnswer = Console.ReadLine().ToLower();
+                }
+                Console.Clear();
+            } while (userAnswer == "yes");            
         }
     }
 }
