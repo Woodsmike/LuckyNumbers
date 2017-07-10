@@ -127,14 +127,8 @@ namespace LuckyNumbers
 
                 //I display the current jackpot total
                 Console.WriteLine("\n\nCurrent Jackpot Total: " + jackpotAmount + "\n\n");
-                Console.WriteLine("Please press any key to continue.");
-                while (Console.KeyAvailable)
-                {
-                    Console.ReadKey(false);
-                }
-                Console.ReadKey();
-                Console.Clear();
-
+                
+                
                 //I wanted to compared every element in the first array to 
                 //every element in the second array to see if they are any
                 //matching numbers.  I used a for loop with if statements.
@@ -170,14 +164,22 @@ namespace LuckyNumbers
                 }
                 Console.WriteLine("\nYou guessed " + totalNumberOfCorrectPicks +
                     " numbers correctly\n");
+                Console.WriteLine("Please press any key to continue.");
+                while (Console.KeyAvailable)
+                {
+                    Console.ReadKey(false);
+                }
+                Console.ReadKey();
+                Console.Clear();
 
-               //I needed to figure out the player's winnings.  I could have used
-               //a switch case to determine how many correct picks determined
-               //the amount of winnings.  Since I had a random total jackpot, I
-               //determined the if statement with a percentage to be the best.
-               //I divided the total jackpot by the (7  minus the number of picks
-               //correct).  The higher the correct picks the lower the denominator
-               //which gives a larger winning amount.
+
+                //I needed to figure out the player's winnings.  I could have used
+                //a switch case to determine how many correct picks determined
+                //the amount of winnings.  Since I had a random total jackpot, I
+                //determined the if statement with a percentage to be the best.
+                //I divided the total jackpot by the (7  minus the number of picks
+                //correct).  The higher the correct picks the lower the denominator
+                //which gives a larger winning amount.
                 decimal playersWinnings = 0m;
                 if (totalNumberOfCorrectPicks == 0)
                 {
@@ -207,7 +209,8 @@ namespace LuckyNumbers
                 
                 while(userAnswer != "no" && userAnswer != "yes")
                 {
-                    Console.WriteLine("Do you want to play again?  YES/NO \n");
+                    Console.WriteLine("Do you want to play again? " +
+                        "YES/NO \n");
                     userAnswer = Console.ReadLine().ToLower();
                 }
                 Console.Clear();
